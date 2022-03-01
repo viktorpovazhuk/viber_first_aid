@@ -10,6 +10,7 @@ def counting():
         else:
             print("counting at: "+str(i))
             time.sleep(5) #sleep for 5 seconds
+            # update
 
 #our main function
 if __name__ == '__main__':
