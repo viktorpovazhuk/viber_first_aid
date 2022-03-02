@@ -1,8 +1,11 @@
 import pandas as pd
 
-from medical_data import MedicalData 
+from medical_data import MedicalData
+
 
 class ReadMedicalData:
+    """
+    """
 
     URL = "https://docs.google.com/spreadsheets/d/{0}/gviz/tq?tqx=out:csv&sheet={1}"
 
@@ -18,15 +21,17 @@ class ReadMedicalData:
         """
         return self.URL.format(self.__id_sheet, self.__sheet_name)
 
-    def get_google_sheet_data(self):
+    def get_google_sheet_data(self) -> pd.DataFrame:
         """
         """
         url = self.google_sheet_url
         google_sheet_data = pd.read_csv(url)
+
         return google_sheet_data
-  
-    def get_medicals_data(self):
-        medicals_data = list()
+
+    def get_medical_data(self) -> MedicalData:
+        """
+        """
         google_sheet_data = self.get_google_sheet_data()
 
         for _, row in google_sheet_data.iterrows():
@@ -36,14 +41,6 @@ class ReadMedicalData:
             link = row["link"]
 
             medical_data = MedicalData(hierarchy, option, answer, link)
-            medicals_data.append(medical_data)
+            medical_data.save_to_list(medical_data)
 
-        return medicals_data
-
-def main():
-    medicals_data = ReadMedicalData().get_medicals_data()
-    a = 1
-    b = a
-
-if __name__ == "__main__":
-    main()
+        return medical_data
