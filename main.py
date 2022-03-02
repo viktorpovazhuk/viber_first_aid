@@ -10,8 +10,8 @@ from viberbot.api.messages import TextMessage
 from viberbot.api.viber_requests import ViberMessageRequest, ViberConversationStartedRequest, ViberSubscribedRequest, \
     ViberFailedRequest
 
-from src.config import TOKEN
-from src.handlers import handle_message
+from viber_bot.config import TOKEN
+from viber_bot.handlers import handle_message
 
 app = Flask(__name__)
 viber = Api(BotConfiguration(
@@ -35,7 +35,7 @@ def incoming():
     # this library supplies a simple way to receive a request object
     viber_request = viber.parse_request(request.get_data())
 
-    with open("src/keyboard.json") as json_file:
+    with open("viber_bot/keyboard.json") as json_file:
         kb = json.load(json_file)
 
     if isinstance(viber_request, ViberMessageRequest):
