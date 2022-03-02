@@ -6,7 +6,8 @@ def main():
     #button = "Start"
     #button = "Серцево-легенева реанімація"
     #button = "Так"
-    button = "Back"
+    button = "Дитина 1-8 років"
+    #button = "Back"
 
     if button == "Start":
         begin_options = medical_data.get_begin_options()

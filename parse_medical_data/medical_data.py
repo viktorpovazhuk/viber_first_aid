@@ -119,6 +119,8 @@ class MedicalData:
                 next_option = medical_data.__option
                 next_options.append(next_option)
 
+        next_options.append(self.LEVEL_BACK)
+
         return next_options
 
     def get_answer(self, option: str) -> str:
@@ -143,15 +145,7 @@ class MedicalData:
         option = self.__get_back_option()
 
         if option:
-            next_level_regex = self.__get_next_level_regex(option)
-
-            for medical_data in self.medicals_data:
-                possible_level = medical_data.__hierarchy
-
-                if re.match(next_level_regex, possible_level):
-                    back_option = medical_data.__option
-                    back_options.append(back_option)
-
+            back_options = self.get_next_options(option)
         else:
             back_options = self.get_begin_options()
 
