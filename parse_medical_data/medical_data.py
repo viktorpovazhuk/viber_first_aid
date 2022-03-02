@@ -48,7 +48,7 @@ class MedicalData:
         medical_data = self.__get_medical_data(option)
 
         level = medical_data.__hierarchy
-        next_level_regex = rf"{level}.\d+"
+        next_level_regex = rf"^{level}.\d+$"
 
         return next_level_regex
 
@@ -93,6 +93,18 @@ class MedicalData:
 
         return begin_options
 
+    def get_answer(self) -> str:
+        """
+        """
+        #introduction text
+        return 
+
+    def get_link(self, option: str) -> str:
+        """
+        """
+        #introduction image link
+        return
+
     def get_next_options(self, option: str) -> List[str]:
         """
         """
@@ -129,14 +141,19 @@ class MedicalData:
         back_options = list()
 
         option = self.__get_back_option()
-        next_level_regex = self.__get_next_level_regex(option)
 
-        for medical_data in self.medicals_data:
-            possible_level = medical_data.__hierarchy
+        if option:
+            next_level_regex = self.__get_next_level_regex(option)
 
-            if re.match(next_level_regex, possible_level):
-                back_option = medical_data.__option
-                back_options.append(back_option)
+            for medical_data in self.medicals_data:
+                possible_level = medical_data.__hierarchy
+
+                if re.match(next_level_regex, possible_level):
+                    back_option = medical_data.__option
+                    back_options.append(back_option)
+
+        else:
+            back_options = self.get_begin_options()
 
         return back_options
 
@@ -144,7 +161,11 @@ class MedicalData:
         """
         """
         option = self.__get_back_option()
-        self.__set_medical_data(option)
+
+        if option:
+            self.__set_medical_data(option)
+        else:
+            pass # Can add introduction 
 
         return self.__answer
 
@@ -152,6 +173,10 @@ class MedicalData:
         """
         """
         option = self.__get_back_option()
-        self.__set_medical_data(option)
+
+        if option:
+            self.__set_medical_data(option)
+        else:
+            pass # Can add introduction 
 
         return self.__link
